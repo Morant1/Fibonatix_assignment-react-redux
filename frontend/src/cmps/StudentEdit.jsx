@@ -40,45 +40,25 @@ export class StudentEdit extends Component {
 
     onSaveStudent = (ev) => {
         ev.preventDefault()
-        console.log(this.state)
         this.props.onUpdate(this.state.student)
-        // const { toy } = this.state
-
-        // if (this.state.toy._id) {
-        //     this.props.updateToy(toy)
-
-        // } else {
-        //     this.props.addToy(toy)
-        // }
-
-        // this.props.history.push('/toy')
-
     }
 
-    // uploadImg = (ev) => {
-    //     cloudinary.uploadImg(ev.target);
-    // }
 
     render() {
         const { student } = this.state
         return (
             <div>
                 <form onSubmit={this.onSaveStudent} className="edit-student">
-                    <img src={`https://robohash.org/${student._id}`} />
-                    <input type="text" value={student.name} onChange={this.handleInput} name="name" />
-
-                    <ul>
-                        <li><label>Age:</label><input type="number" value={student.age} onChange={this.handleInput} name="age" /></li>
-                        <li><label>Gender:</label>
+                <label htmlFor="name">Name:</label><input id="name" type="text" value={student.name} onChange={this.handleInput} name="name" />
+                        <label htmlFor="age">Age:</label><input id="age" type="number" value={student.age} onChange={this.handleInput} name="age" />
+                        <label>Gender:</label>
                             <select name="gender" value={student.gender} onChange={this.handleInput}>
                                 <option value="male">male</option>
                                 <option value="female">female</option>
-                            </select></li>
-                        <li><label>city:</label><input type="text" value={student.city} onChange={this.handleInput} name="city" /></li>
-                    </ul>
+                            </select>
+                        <label htmlFor="city">city:</label><input id="city" type="text" value={student.city} onChange={this.handleInput} name="city" />
+                    
                     <button type="submit">Save</button>
-
-
                 </form>
                 <button onClick={() => { this.props.onEdit() }}>Back</button>
             </div>

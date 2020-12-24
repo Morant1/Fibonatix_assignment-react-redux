@@ -68,8 +68,9 @@ class _StudentDetails extends Component {
 
                 <button onClick={() => { this.onBack() }}>Back</button>
 
+                <img alt="img_profile" src={`https://randomuser.me/api/portraits/${student.gender === 'male' ? 'men' : 'women'}/${student._id}.jpg` }/>
+
                 {!isEditMode && <div className="details-container">
-                    <img src={`https://robohash.org/${student._id}`} />
                     <h1>{this.capitalizeText(student.name)}</h1>
                     <ul>
                         <li><span>Age:</span>{student.age}</li>
