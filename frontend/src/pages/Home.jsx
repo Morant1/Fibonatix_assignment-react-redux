@@ -16,7 +16,7 @@ class _Home extends Component {
     }
 
     async componentDidMount() {
-        await this.props.loadStudents();
+        if (!this.props.students.length) await this.props.loadStudents();
         this.calcPageCount()
     }
 
@@ -29,7 +29,7 @@ class _Home extends Component {
     onNextPage = (pageNumber) => {
         const { pageCount } = this.state;
         const pageIdx = (pageNumber + 1 <= pageCount) ? pageNumber : 0;
-        this.setState({ pageIdx, chosenBtn: pageNumber }, () => { console.log(this.state) })
+        this.setState({ pageIdx, chosenBtn: pageNumber})
     }
 
     get getStudents() {

@@ -7,7 +7,8 @@ export const studentService = {
     query,
     getById,
     remove,
-    save
+    save,
+    getPrevNextId
 }
 
 
@@ -26,11 +27,12 @@ async function query() {
         storageService.saveToStorage(KEY, gStudents);
     }
 
+    console.log("gStudents",gStudents)
     return gStudents
 }
 
 async function getById(studentId) {
-    const res = await axios.get(`${BASE_URL}/${studentId}`)
+    let res = await axios.get(`${BASE_URL}/${studentId}`)
     return res.data;
 
 }
@@ -40,13 +42,21 @@ async function remove(studentId) {
 }
 
 async function save(student) {
-    let res;
-    if (student._id) {
-        res = await axios.put(`${BASE_URL}/${student._id}`, student);
-    } else {
-        res = await axios.post(BASE_URL, student);
-    }
+    let res = await axios.put(`${BASE_URL}/${student._id}`, student);
+    console.log(res.data)
     return res.data;
 }
 
 
+async function getPrevNextId(currStudent){
+    if (!gStudents) gStudents = storageService.loadFromStorage(KEY);
+
+    const currIdx = gStudents.findIndex(student => student._id === currStudent._id)
+    const nextStudent = gStudents[currIdx + 1] || gStudents[0]
+    const prevStudent = gStudents[currIdx - 1] || gStudents[gStudents.length - 1]
+
+     return {
+       prevId: prevStudent._id,
+       nextId: nextStudent._id
+     }
+}
