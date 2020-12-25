@@ -1,9 +1,68 @@
 .student-app {
-    .navigation {
-        .btn {
-            &.color {
-                color:red;
+    position: relative;
+
+    i.trash {
+        position: absolute;
+        left: 60px;
+        font-size: 25px;
+        top: 24px;
+        color: #46adff;
+        cursor: pointer;
+
+        &:hover {
+            color: #38a5ff;
+        }
+    }
+
+    .wrapper {
+        margin: 30px 40px;
+
+        h1.title {
+            padding-left: 80px;
+            font-family: 'Ubunto',sans-serif;
+            font-size: 25px;
+            line-height: 3;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            border-bottom: 1px solid #d3d3d36b;
+
+            i {
+                margin-right: 15px;
             }
         }
+
+        .navigation {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .btn {
+                background-color: white;
+                border: none;
+                margin: 0 5px;
+                font-size: 16px;
+                font-family: Ubunto,sans-serif;
+                cursor: pointer;
+                color: lightgray;
+                &.color {
+                    color: rgb(29, 29, 29);
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .student-app .wrapper h1.title {
+        padding-left: 0;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .student-app i.trash {
+        left: 58px;
+        font-size: 20px;
+        top: 15px;
     }
 }

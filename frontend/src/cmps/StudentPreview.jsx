@@ -11,10 +11,6 @@ export class StudentPreview extends Component {
         checked:false
     }
 
-    capitalizeText = (txt) => {
-        return txt.charAt(0).toUpperCase() + txt.slice(1);
-    }
-
     
     handleInput = (ev) => {
         const checked = ev.target.checked;
@@ -34,13 +30,16 @@ export class StudentPreview extends Component {
                     checked={checked}
                     onChange={this.handleInput}
                     style ={{
-                        color: "#7d7c7c",
+                        color: "#88c5f9",
+                        backgroundColor: "white"
                       }}
                 />
                     <img src={`https://randomuser.me/api/portraits/${student.gender === 'male' ? 'men' : 'women'}/${student._id}.jpg`} alt="img_profile" />
-                    <h1>{this.capitalizeText(student.name)}</h1>
-                    <h2>{this.capitalizeText(student.email)}</h2>
-                    <h2>{this.capitalizeText(student.university)}</h2>
+                    <div className="student-info">
+                    <h1>{student.name}</h1>
+                    <h2>{student.email}</h2>
+                    </div>
+                    <h2 className="university">{student.university}</h2>
                     <Link to={`/${student._id}`}><button>Details</button></Link>
                 </div>
             
