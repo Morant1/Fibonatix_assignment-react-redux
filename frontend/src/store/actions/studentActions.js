@@ -30,7 +30,6 @@ export function updateStudent(student) {
 export function addstudent(student) {
     return async dispatch => {
         try {
-            console.log("add",student)
             await studentService.save(student);
             dispatch({ type: 'ADD_STUDENT', student })
         } catch (err) {
@@ -41,11 +40,11 @@ export function addstudent(student) {
 }
 
 
-export function removeStudent(id) {
-    return async dispatch => {
+export function removeStudent(ids) {
+    return dispatch => {
         try {
-            await studentService.remove(id);
-            dispatch({ type: 'REMOVE_STUDENT', id })
+            studentService.remove(ids);
+            dispatch({ type: 'REMOVE_STUDENT', ids })
         } catch (err) {
             console.log('err in removeStudent', err);
         }

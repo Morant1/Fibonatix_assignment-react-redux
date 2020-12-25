@@ -16,7 +16,7 @@ export function studentReducer(state = initialState, action) {
           return { ...state, students: [...state.students, action.student] }
 
       case 'REMOVE_STUDENT':
-          const students = state.students.filter(student => student._id !== action.id)
+          const students = state.students.filter(student => !action.ids.includes(student._id));
           return { ...state, students }
   
       default:

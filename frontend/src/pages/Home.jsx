@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { StudentList } from '../cmps/StudentList'
-import { loadStudents } from '../store/actions/studentActions'
+import { loadStudents,removeStudent } from '../store/actions/studentActions'
+
 
 class _Home extends Component {
 
@@ -11,12 +12,14 @@ class _Home extends Component {
         pageSize: 8,
         pageIdx: 0,
         pageCount: 0,
-        chosenBtn: 0
+        chosenBtn: 0,
+        idsToRemove: []
+        // Make it in global state!
 
     }
 
     async componentDidMount() {
-        if (!this.props.students.length) await this.props.loadStudents();
+        await this.props.loadStudents();
         this.calcPageCount()
     }
 
@@ -29,7 +32,7 @@ class _Home extends Component {
     onNextPage = (pageNumber) => {
         const { pageCount } = this.state;
         const pageIdx = (pageNumber + 1 <= pageCount) ? pageNumber : 0;
-        this.setState({ pageIdx, chosenBtn: pageNumber})
+        this.setState({ pageIdx, chosenBtn: pageNumber })
     }
 
     get getStudents() {
@@ -39,16 +42,38 @@ class _Home extends Component {
         var startIdx = pageIdx * pageSize;
         return students.slice(startIdx, startIdx + pageSize);
     }
+    remove = (studentId) => {
+        let idsToRemove;
+        const id = this.state.idsToRemove.find(id => id === studentId)
+        if (!id) {
+            console.log("needs to add")
+            idsToRemove = [...this.state.idsToRemove, studentId];
+        } else {
+            console.log("needs to remove")
+            idsToRemove = this.state.idsToRemove.filter(id => id !== studentId);
+        }
+
+        this.setState({ idsToRemove }, () => { console.log(this.state.idsToRemove) })
+
+    }
+
+    onRemoveBtn = () => {
+        this.props.removeStudent(this.state.idsToRemove);
+        this.setState({ idsToRemove : [] },()=>{this.calcPageCount()});
+    }
 
 
     render() {
         const students = this.getStudents;
-        const { pageCount, chosenBtn } = this.state;
+        const { pageCount, chosenBtn, idsToRemove } = this.state;
 
         if (!students) return <div>Loading....</div>
         return (
             <div className="student-app">
-                <StudentList students={students} />
+                {idsToRemove.length ?
+                    <i className="fas fa-trash-alt" onClick={this.onRemoveBtn}></i>
+                    : ''}
+                <StudentList students={students} remove={this.remove} />
                 <div className="navigation">
                     {[...Array(pageCount)].map((val, idx) => {
                         return (
@@ -73,7 +98,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    loadStudents
+    loadStudents,
+    removeStudent
 }
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home)

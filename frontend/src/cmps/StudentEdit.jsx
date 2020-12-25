@@ -40,6 +40,7 @@ export class StudentEdit extends Component {
 
     onSaveStudent = (ev) => {
         ev.preventDefault()
+        console.log(this.state.student)
         this.props.onUpdate(this.state.student)
     }
 

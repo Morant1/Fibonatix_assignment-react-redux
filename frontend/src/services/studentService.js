@@ -19,7 +19,6 @@ let gStudents = storageService.loadFromStorage(KEY);
 
 
 async function query() {
-
     if (!gStudents || !gStudents.length) {
         let res = await axios.get(`${BASE_URL}`)
         gStudents = res.data;
@@ -30,35 +29,32 @@ async function query() {
 }
 
 function getById(studentId) {
-
     const student = gStudents.find(student => student._id === studentId);
-    console.log(student)
     return Promise.resolve(student);
-
-    // OR
-    // let res = await axios.get(`${BASE_URL}/${studentId}`)
-    // return res.data;
-
 }
 
-async function remove(studentId) {
-    await axios.delete(`${BASE_URL}/${studentId}`)
+function remove(ids) {
+    gStudents = gStudents.filter(student => !ids.includes(student._id))
+    storageService.saveToStorage(KEY,gStudents);
 }
 
-async function save(student) {
-    let res = await axios.put(`${BASE_URL}/${student._id}`, student);
-    return res.data;
+function save(currStudent) {
+    const idx = gStudents.findIndex(student => student._id === currStudent._id)
+    gStudents.splice(idx,1,currStudent);
+    storageService.saveToStorage(KEY,gStudents)
+
+    return Promise.resolve(currStudent);
 }
 
 
-async function getPrevNextId(currStudent) {
+function getPrevNextId(currStudent) {
 
     const currIdx = gStudents.findIndex(student => student._id === currStudent._id)
     const nextStudent = gStudents[currIdx + 1] || gStudents[0]
     const prevStudent = gStudents[currIdx - 1] || gStudents[gStudents.length - 1]
 
-    return {
+    return Promise.resolve({
         prevId: prevStudent._id,
         nextId: nextStudent._id
-    }
+    })
 }
