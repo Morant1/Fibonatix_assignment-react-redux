@@ -39,6 +39,8 @@ export class StudentPreview extends Component {
                 />
                     <img src={`https://randomuser.me/api/portraits/${student.gender === 'male' ? 'men' : 'women'}/${student._id}.jpg`} alt="img_profile" />
                     <h1>{this.capitalizeText(student.name)}</h1>
+                    <h2>{this.capitalizeText(student.email)}</h2>
+                    <h2>{this.capitalizeText(student.university)}</h2>
                     <Link to={`/${student._id}`}><button>Details</button></Link>
                 </div>
             

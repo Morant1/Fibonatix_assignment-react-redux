@@ -8,13 +8,17 @@ export const studentService = {
     getById,
     remove,
     save,
-    getPrevNextId
+    getPrevNextId,
+    getPageData,
+    setPageData
 }
 
 
 
-const KEY = 'STUDENTS';
-let gStudents = storageService.loadFromStorage(KEY);
+const KEY_STUDENTS = 'STUDENTS';
+const KEY_PAGE = "PAGE"
+let gStudents = storageService.loadFromStorage(KEY_STUDENTS);
+let gPageData = storageService.loadFromStorage(KEY_PAGE) || {chosenBtn:0,pageIdx:0}
 
 
 
@@ -22,7 +26,7 @@ async function query() {
     if (!gStudents || !gStudents.length) {
         let res = await axios.get(`${BASE_URL}`)
         gStudents = res.data;
-        storageService.saveToStorage(KEY, gStudents);
+        storageService.saveToStorage(KEY_STUDENTS, gStudents);
     }
 
     return gStudents
@@ -35,13 +39,13 @@ function getById(studentId) {
 
 function remove(ids) {
     gStudents = gStudents.filter(student => !ids.includes(student._id))
-    storageService.saveToStorage(KEY,gStudents);
+    storageService.saveToStorage(KEY_STUDENTS,gStudents);
 }
 
 function save(currStudent) {
     const idx = gStudents.findIndex(student => student._id === currStudent._id)
     gStudents.splice(idx,1,currStudent);
-    storageService.saveToStorage(KEY,gStudents)
+    storageService.saveToStorage(KEY_STUDENTS,gStudents)
 
     return Promise.resolve(currStudent);
 }
@@ -57,4 +61,13 @@ function getPrevNextId(currStudent) {
         prevId: prevStudent._id,
         nextId: nextStudent._id
     })
+}
+
+function getPageData() {
+    return Promise.resolve(gPageData)
+}
+function setPageData(chosenBtn,pageIdx) {
+    gPageData = {chosenBtn,pageIdx};
+    storageService.saveToStorage(KEY_PAGE,gPageData)
+
 }

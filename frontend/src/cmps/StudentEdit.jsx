@@ -10,7 +10,9 @@ export class StudentEdit extends Component {
             name: '',
             age: '',
             gender: '',
-            city: ''
+            city: '',
+            email:'',
+            university: ''
         }
     }
 
@@ -57,7 +59,9 @@ export class StudentEdit extends Component {
                                 <option value="male">male</option>
                                 <option value="female">female</option>
                             </select>
-                        <label htmlFor="city">city:</label><input id="city" type="text" value={student.city} onChange={this.handleInput} name="city" />
+                        <label htmlFor="city">City:</label><input id="city" type="text" value={student.city} onChange={this.handleInput} name="city" />
+                        <label htmlFor="email">Email:</label><input id="email" type="email" value={student.email} onChange={this.handleInput} name="email" />
+                        <label htmlFor="university">University:</label><input id="university" type="text" value={student.university} onChange={this.handleInput} name="university" />
                     
                     <button type="submit">Save</button>
                 </form>

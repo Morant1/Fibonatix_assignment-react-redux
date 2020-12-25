@@ -75,7 +75,9 @@ class _StudentDetails extends Component {
                     <ul>
                         <li><span>Age:</span>{student.age}</li>
                         <li><span>Gender:</span>{this.capitalizeText(student.gender)}</li>
-                        <li><span>city:</span>{this.capitalizeText(student.city)},Israel</li>
+                        <li><span>City:</span>{this.capitalizeText(student.city)},Israel</li>
+                        <li><span>Email:</span>{this.capitalizeText(student.email)}</li>
+                        <li><span>University:</span>{this.capitalizeText(student.university)},Israel</li>
                     </ul>
                     <button onClick={() => { this.onEdit() }}>Edit</button>
 

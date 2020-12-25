@@ -4,23 +4,24 @@ import PropTypes from 'prop-types'
 
 import { StudentList } from '../cmps/StudentList'
 import { loadStudents,removeStudent } from '../store/actions/studentActions'
+import { studentService } from '../services/studentService'
 
 
 class _Home extends Component {
 
     state = {
         pageSize: 8,
-        pageIdx: 0,
         pageCount: 0,
-        chosenBtn: 0,
         idsToRemove: []
-        // Make it in global state!
 
     }
 
     async componentDidMount() {
         await this.props.loadStudents();
         this.calcPageCount()
+
+        const {chosenBtn,pageIdx} = await studentService.getPageData();
+        this.setState({chosenBtn,pageIdx})
     }
 
     calcPageCount = () => {
@@ -32,34 +33,41 @@ class _Home extends Component {
     onNextPage = (pageNumber) => {
         const { pageCount } = this.state;
         const pageIdx = (pageNumber + 1 <= pageCount) ? pageNumber : 0;
-        this.setState({ pageIdx, chosenBtn: pageNumber })
+        const chosenBtn =  pageNumber;
+
+        studentService.setPageData(chosenBtn,pageIdx);
+        this.setState({ pageIdx, chosenBtn })
     }
 
     get getStudents() {
         const { students } = this.props;
-        const { pageIdx, pageSize } = this.state;
+        const { pageIdx, pageSize} = this.state;
 
         var startIdx = pageIdx * pageSize;
+
         return students.slice(startIdx, startIdx + pageSize);
     }
+
     remove = (studentId) => {
         let idsToRemove;
         const id = this.state.idsToRemove.find(id => id === studentId)
         if (!id) {
-            console.log("needs to add")
             idsToRemove = [...this.state.idsToRemove, studentId];
         } else {
-            console.log("needs to remove")
             idsToRemove = this.state.idsToRemove.filter(id => id !== studentId);
         }
 
-        this.setState({ idsToRemove }, () => { console.log(this.state.idsToRemove) })
+        this.setState({ idsToRemove })
 
     }
 
     onRemoveBtn = () => {
+        const {idsToRemove,chosenBtn} = this.state
         this.props.removeStudent(this.state.idsToRemove);
-        this.setState({ idsToRemove : [] },()=>{this.calcPageCount()});
+        this.setState({ idsToRemove : [] },()=>{
+            this.calcPageCount()
+            if(!(this.getStudents.length - idsToRemove.length)) this.onNextPage(chosenBtn -1)
+        });
     }
 
 
