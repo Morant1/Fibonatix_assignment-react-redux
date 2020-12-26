@@ -45,6 +45,7 @@ class _Home extends Component {
     select = async (student) => {
         const currStudent = { ...student };
         currStudent.isSelected = !currStudent.isSelected;
+        if (this.state.checked && !currStudent.isSelected) this.setState({checked:false})
         await this.props.updateStudent(currStudent);
     }
 
@@ -55,6 +56,7 @@ class _Home extends Component {
 
         const isSelectedAll = this.getStudents.every(student => student.isSelected);
         if (isSelectedAll && !!chosenBtn) this.onNextPage(chosenBtn - 1)
+        if (!this.props.students.length) this.setState({ checked: false })
 
     }
 
@@ -95,7 +97,7 @@ class _Home extends Component {
 
 
                 <div className="wrapper">
-                    <div>
+                    <div className="checkbox">
                         <FormControlLabel
                             control={<Checkbox checked={checked} onChange={this.handleInput} style={{
                                 color: "#88c5f9",
@@ -104,7 +106,7 @@ class _Home extends Component {
                             label="Select all"
                         />
 
-                        <h1><i className="fas fa-user-graduate"></i>Students</h1>
+                        {/* <h1><i className="fas fa-user-graduate"></i>Students</h1> */}
                     </div>
                     <StudentList students={students} select={this.select} />
                     <div className="navigation">

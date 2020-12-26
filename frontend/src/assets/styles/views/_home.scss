@@ -5,7 +5,7 @@
         position: absolute;
         right: 60px;
         font-size: 25px;
-        top: 24px;
+        // top: 9px;
         color: #46adff;
         cursor: pointer;
 
@@ -15,24 +15,10 @@
     }
 
     .wrapper {
-        margin: 30px 40px;
-
-        h1.title {
-            padding-left: 80px;
-            font-family: 'Ubunto',sans-serif;
-            font-size: 25px;
-            line-height: 3;
-            color: #a0a0a0;
-            text-transform: uppercase;
-            border-bottom: 1px solid #d3d3d36b;
-
-            i {
-                margin-right: 15px;
-            }
-        }
+        margin: 10px 40px 0 40px;
 
         .navigation {
-            margin: 20px 0;
+            margin: 10px 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -40,8 +26,8 @@
                 background-color: white;
                 border: none;
                 margin: 0 5px;
-                font-size: 16px;
-                font-family: Ubunto,sans-serif;
+                font-size: 18px;
+                font-family: Ubunto, sans-serif;
                 cursor: pointer;
                 color: lightgray;
                 &.color {
@@ -54,15 +40,12 @@
 }
 
 @media only screen and (max-width: 560px) {
-    .student-app .wrapper h1.title {
-        padding-left: 0;
-        font-size: 18px;
-        text-align: center;
+    .student-app i.trash {
+        right: 30px;
+        font-size: 23px;
     }
 
-    .student-app i.trash {
-        left: 58px;
-        font-size: 20px;
-        top: 15px;
+    .student-app .wrapper {
+        margin: 30px 15px;
     }
 }

@@ -1,14 +1,14 @@
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import {NavBar} from './cmps/NavBar'
 import {Home} from './pages/Home'
 import {StudentDetails} from './pages/StudentDetails'
-// import {NavBar} from './cmps/NavBar'
 
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <NavBar/> */}
+        <NavBar/>
         <Switch>
           <Route component={StudentDetails} path='/:_id' />
           <Route component={Home} path='/' />
