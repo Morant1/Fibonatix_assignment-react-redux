@@ -17,8 +17,12 @@
     .wrapper {
         margin: 10px 40px 0 40px;
 
+        .checkbox {
+            margin-left: 10px;
+        }
+
         .navigation {
-            margin: 10px 0;
+            padding: 10px 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -26,16 +30,24 @@
                 background-color: white;
                 border: none;
                 margin: 0 5px;
+                border-radius: 50%;
                 font-size: 18px;
                 font-family: Ubunto, sans-serif;
                 cursor: pointer;
                 color: lightgray;
+                &:hover {
+                    color: rgb(27, 27, 27);
+                }
                 &.color {
                     color: rgb(29, 29, 29);
                     font-weight: 700;
                 }
             }
         }
+    }
+
+    .MuiButtonBase-root {
+        margin-right: 10px;
     }
 }
 
@@ -46,6 +58,6 @@
     }
 
     .student-app .wrapper {
-        margin: 30px 15px;
+        margin: 30px 15px 0 15px;
     }
 }
