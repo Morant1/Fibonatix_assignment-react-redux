@@ -46,7 +46,11 @@ class _Home extends Component {
         const currStudent = { ...student };
         currStudent.isSelected = !currStudent.isSelected;
         if (this.state.checked && !currStudent.isSelected) this.setState({checked:false})
+
         await this.props.updateStudent(currStudent);
+
+        const isSelectedAll = this.props.students.every(student => student.isSelected);
+        if (this.state.checked === false && isSelectedAll) this.setState({checked:true})
     }
 
     onRemoveBtn = async () => {
@@ -59,6 +63,7 @@ class _Home extends Component {
         if (!this.props.students.length) this.setState({ checked: false })
 
     }
+
 
     handleInput = (ev) => {
         const checked = !this.state.checked

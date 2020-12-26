@@ -30,7 +30,7 @@ class _StudentDetails extends Component {
     loadStudent = async () => {
         const studentId = this.props.match.params._id;
         const student = await studentService.getById(studentId);
-        this.setState({ student },()=>{this.getPrevNext()});
+        this.setState({ student }, () => { this.getPrevNext() });
 
 
     }
@@ -60,31 +60,30 @@ class _StudentDetails extends Component {
     }
 
     render() {
-        const { student, isEditMode,nextId, prevId } = this.state
+        const { student, isEditMode, nextId, prevId } = this.state
         if (!student) return <div>Loading...</div>
 
         return (
             <div className="student-details">
 
-                <button onClick={() => { this.onBack() }}>Back</button>
+                <i onClick={() => { this.onBack() }} className="back fas fa-arrow-circle-left"></i>
 
-                <img alt="img_profile" src={`https://randomuser.me/api/portraits/${student.gender === 'male' ? 'men' : 'women'}/${student._id}.jpg` }/>
+                <img alt="img_profile" src={`https://randomuser.me/api/portraits/${student.gender === 'male' ? 'men' : 'women'}/${student._id}.jpg`} />
 
                 {!isEditMode && <div className="details-container">
-                    <h1>{this.capitalizeText(student.name)}</h1>
+                    <h1><i className="fas fa-user-graduate"></i> {this.capitalizeText(student.name)} <span>{student.age} years old</span></h1>
                     <ul>
-                        <li><span>Age:</span>{student.age}</li>
-                        <li><span>Gender:</span>{this.capitalizeText(student.gender)}</li>
-                        <li><span>City:</span>{this.capitalizeText(student.city)},Israel</li>
-                        <li><span>Email:</span>{this.capitalizeText(student.email)}</li>
-                        <li><span>University:</span>{this.capitalizeText(student.university)},Israel</li>
+                        <li><span><i className="fas fa-venus-mars"></i></span>{this.capitalizeText(student.gender)}</li>
+                        <li><span><i className="fas fa-map-marker-alt"></i></span>{this.capitalizeText(student.city)} ,Israel</li>
+                        <li><span><i className="fas fa-at"></i></span>{this.capitalizeText(student.email)}</li>
+                        <li><span><i className="fas fa-university"></i></span>{this.capitalizeText(student.university)} ,Israel</li>
                     </ul>
-                    <button onClick={() => { this.onEdit() }}>Edit</button>
+                    <div className="edit" onClick={() => { this.onEdit() }}><i className="fas fa-user-edit"></i> Edit</div>
 
                     <div className="next-prev">
-                    <div className="btn prev"><Link to={`/${prevId}`}><i className="fas fa-arrow-circle-left"></i></Link></div>
-                    <div className="btn next"><Link to={`/${nextId}`}><i className="fas fa-arrow-circle-right"></i></Link></div>
-                </div>
+                        <div className="btn prev"><Link to={`/${prevId}`}><i className="fas fa-arrow-left"></i></Link></div>
+                        <div className="btn next"><Link to={`/${nextId}`}><i className="fas fa-arrow-right"></i></Link></div>
+                    </div>
 
                 </div>}
 
