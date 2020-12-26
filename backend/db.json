@@ -7,7 +7,8 @@
       "university":"tel aviv university",
       "age": 16,
       "gender": "female",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "80",
@@ -16,7 +17,8 @@
       "university":"tel aviv university",
       "age": 17,
       "gender": "female",
-      "city": "akko"
+      "city": "akko",
+      "isSelected": false
     },
     {
       "_id": "81",
@@ -25,7 +27,8 @@
       "university":"tel aviv university",
       "age": 16,
       "gender": "male",
-      "city": "Tel aviv"
+      "city": "Tel aviv",
+      "isSelected": false
     },
     {
       "_id": "82",
@@ -34,7 +37,8 @@
       "university":"hebrew university",
       "age": 17,
       "gender": "female",
-      "city": "kefar saba"
+      "city": "kefar saba",
+      "isSelected": false
     },
     {
       "_id": "83",
@@ -43,7 +47,8 @@
       "university":"hebrew university",
       "age": 17,
       "gender": "male",
-      "city": "ramat gan"
+      "city": "ramat gan",
+      "isSelected": false
     },
     {
       "_id": "84",
@@ -52,7 +57,8 @@
       "university":"tel aviv university",
       "age": 17,
       "gender": "female",
-      "city": "akko"
+      "city": "akko",
+      "isSelected": false
     },
     {
       "_id": "85",
@@ -61,7 +67,8 @@
       "university":"tel aviv university",
       "age": 15,
       "gender": "male",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "86",
@@ -70,7 +77,8 @@
       "university":"tel aviv university",
       "age": 16,
       "gender": "male",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "87",
@@ -79,7 +87,8 @@
       "university":"bar ilan university",
       "age": 17,
       "gender": "female",
-      "city": "ramat gan"
+      "city": "ramat gan",
+      "isSelected": false
     },
     {
       "_id": "88",
@@ -88,7 +97,8 @@
       "university":"bar ilan university",
       "age": 16,
       "gender": "female",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "89",
@@ -97,7 +107,8 @@
       "university":"hebrew university",
       "age": 16,
       "gender": "male",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "90",
@@ -106,7 +117,8 @@
       "university":"hebrew university",
       "age": 17,
       "gender": "female",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "91",
@@ -115,7 +127,8 @@
       "university":"tel aviv university",
       "age": 15,
       "gender": "female",
-      "city": "dimona"
+      "city": "dimona",
+      "isSelected": false
     },
     {
       "_id": "92",
@@ -124,7 +137,8 @@
       "university":"tel aviv university",
       "age": 15,
       "gender": "male",
-      "city": "herzliya"
+      "city": "herzliya",
+      "isSelected": false
     },
     {
       "_id": "93",
@@ -133,7 +147,8 @@
       "university":"bar ilan university",
       "age": 17,
       "gender": "female",
-      "city": "herzliya"
+      "city": "herzliya",
+      "isSelected": false
     },
     {
       "_id": "94",
@@ -142,7 +157,8 @@
       "university":"bar ilan university",
       "age": 17,
       "gender": "male",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     },
     {
       "_id": "95",
@@ -151,7 +167,8 @@
       "university":"tel aviv university",
       "age": 18,
       "gender": "male",
-      "city": "bnei brak"
+      "city": "bnei brak",
+      "isSelected": false
     },
     {
       "_id": "96",
@@ -160,7 +177,8 @@
       "university":"tel aviv university",
       "age": 17,
       "gender": "female",
-      "city": "bnei brak"
+      "city": "bnei brak",
+      "isSelected": false
     },
     {
       "_id": "97",
@@ -169,7 +187,8 @@
       "university":"tel aviv university",
       "age": 16,
       "gender": "female",
-      "city": "nahariyya"
+      "city": "nahariyya",
+      "isSelected": false
     },
     {
       "_id": "98",
@@ -178,7 +197,8 @@
       "university":"tel aviv university",
       "age": 17,
       "gender": "female",
-      "city": "tel aviv"
+      "city": "tel aviv",
+      "isSelected": false
     }
   ]
 }

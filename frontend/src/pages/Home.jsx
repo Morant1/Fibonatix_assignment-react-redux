@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import { StudentList } from '../cmps/StudentList'
-import { loadStudents, removeStudent } from '../store/actions/studentActions'
+import { loadStudents, removeStudent, updateStudent, selectAll } from '../store/actions/studentActions'
 import { studentService } from '../services/studentService'
+
 
 
 class _Home extends Component {
@@ -12,7 +15,7 @@ class _Home extends Component {
     state = {
         pageSize: 8,
         pageCount: 0,
-        idsToRemove: []
+        checked: false
 
     }
 
@@ -39,55 +42,71 @@ class _Home extends Component {
         this.setState({ pageIdx, chosenBtn })
     }
 
+    select = async (student) => {
+        const currStudent = { ...student };
+        currStudent.isSelected = !currStudent.isSelected;
+        await this.props.updateStudent(currStudent);
+    }
+
+    onRemoveBtn = async () => {
+        const { chosenBtn } = this.state
+        await this.props.removeStudent();
+        this.calcPageCount()
+
+        const isSelectedAll = this.getStudents.every(student => student.isSelected);
+        if (isSelectedAll && !!chosenBtn) this.onNextPage(chosenBtn - 1)
+
+    }
+
+    handleInput = (ev) => {
+        const checked = !this.state.checked
+        this.props.selectAll(checked)
+        this.setState({ checked })
+    }
+
+
     get getStudents() {
         const { students } = this.props;
         const { pageIdx, pageSize } = this.state;
 
         var startIdx = pageIdx * pageSize;
- 
+
         return students.slice(startIdx, startIdx + pageSize);
     }
 
-    remove = (studentId) => {
-        let idsToRemove;
-        const id = this.state.idsToRemove.find(id => id === studentId)
-        if (!id) {
-            idsToRemove = [...this.state.idsToRemove, studentId];
-        } else {
-            idsToRemove = this.state.idsToRemove.filter(id => id !== studentId);
-        }
-
-        this.setState({ idsToRemove })
-
+    get getRemoveSign() {
+        const isSelected = this.props.students.find(student => student.isSelected)
+        if (isSelected) return true;
+        else return false;
     }
 
-    onRemoveBtn = () => {
-        const { idsToRemove, chosenBtn } = this.state
-        this.props.removeStudent(this.state.idsToRemove);
-        console.log(this.getStudents.length - idsToRemove.length)
-        if (!(this.getStudents.length - idsToRemove.length)) this.onNextPage(chosenBtn - 1)
-
-        this.setState({ idsToRemove: [] },()=>{
-            this.calcPageCount();
-        })
-     
-    }
 
 
     render() {
         const students = this.getStudents;
-        const { pageCount, chosenBtn, idsToRemove } = this.state;
+        const { pageCount, chosenBtn, checked } = this.state;
 
         if (!students) return <div>Loading....</div>
         return (
             <div className="student-app">
-                {idsToRemove.length ?
+                {this.getRemoveSign ?
                     <i className="trash fas fa-trash-alt" onClick={this.onRemoveBtn}></i>
                     : ''}
 
+
                 <div className="wrapper">
-                    <h1 className="title"><i className="fas fa-user-graduate"></i>Students</h1>
-                    <StudentList students={students} remove={this.remove} />
+                    <div>
+                        <FormControlLabel
+                            control={<Checkbox checked={checked} onChange={this.handleInput} style={{
+                                color: "#88c5f9",
+                                backgroundColor: "white"
+                            }} />}
+                            label="Select all"
+                        />
+
+                        <h1><i className="fas fa-user-graduate"></i>Students</h1>
+                    </div>
+                    <StudentList students={students} select={this.select} />
                     <div className="navigation">
                         {[...Array(pageCount)].map((val, idx) => {
                             return (
@@ -114,7 +133,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadStudents,
-    removeStudent
+    removeStudent,
+    updateStudent,
+    selectAll
 }
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home)

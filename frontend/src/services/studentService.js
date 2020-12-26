@@ -10,7 +10,8 @@ export const studentService = {
     save,
     getPrevNextId,
     getPageData,
-    setPageData
+    setPageData,
+    selectAll
 }
 
 
@@ -37,8 +38,8 @@ function getById(studentId) {
     return Promise.resolve(student);
 }
 
-function remove(ids) {
-    gStudents = gStudents.filter(student => !ids.includes(student._id))
+function remove() {
+    gStudents = gStudents.filter(student => !student.isSelected)
     storageService.saveToStorage(KEY_STUDENTS,gStudents);
 }
 
@@ -71,3 +72,15 @@ function setPageData(chosenBtn,pageIdx) {
     storageService.saveToStorage(KEY_PAGE,gPageData)
 
 }
+
+function selectAll(isSelect) {
+
+    gStudents = gStudents.map(student => {
+        if (isSelect ? !student.isSelected: student.isSelected ) student.isSelected = !student.isSelected
+        return student;
+    })
+    storageService.saveToStorage(KEY_STUDENTS,gStudents);
+}
+
+
+

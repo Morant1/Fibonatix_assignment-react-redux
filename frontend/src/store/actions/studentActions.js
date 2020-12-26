@@ -1,6 +1,6 @@
 import { studentService } from '../../services/studentService'
 
-
+// THUNK
 export function loadStudents() {
     return async dispatch => {
         try {
@@ -14,7 +14,7 @@ export function loadStudents() {
 }
 
 
-
+// THUNK
 export function updateStudent(student) {
     return async dispatch => {
         try {
@@ -27,6 +27,7 @@ export function updateStudent(student) {
     }
 }
 
+// THUNK
 export function addstudent(student) {
     return async dispatch => {
         try {
@@ -40,15 +41,29 @@ export function addstudent(student) {
 }
 
 
-export function removeStudent(ids) {
+export function removeStudent() {
     return dispatch => {
         try {
-            studentService.remove(ids);
-            dispatch({ type: 'REMOVE_STUDENT', ids })
+            studentService.remove();
+            dispatch({ type: 'REMOVE_STUDENT' })
         } catch (err) {
             console.log('err in removeStudent', err);
         }
     }
 }
+
+
+export function selectAll(isSelect) {
+    return dispatch => {
+        try {
+            studentService.selectAll(isSelect);
+            dispatch({ type: 'UPDATE_STUDENTS' , isSelect})
+        } catch (err) {
+            console.log('err in updateStudents', err);
+        }
+    }
+}
+
+
 
 
