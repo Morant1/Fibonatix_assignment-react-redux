@@ -21,7 +21,8 @@ class _Home extends Component {
 
     async componentDidMount() {
         await this.props.loadStudents();
-        this.calcPageCount()
+        this.calcPageCount();
+        this.setChecked();
 
         const { chosenBtn, pageIdx } = await studentService.getPageData();
         this.setState({ chosenBtn, pageIdx })
@@ -45,9 +46,12 @@ class _Home extends Component {
     select = async (student) => {
         const currStudent = { ...student };
         currStudent.isSelected = !currStudent.isSelected;
-        // if (this.state.checked && !currStudent.isSelected) this.setState({ checked: false })
         await this.props.updateStudent(currStudent);
 
+        this.setChecked()
+    }
+
+    setChecked = () => {
         const isSelectedAll = this.props.students.every(student => student.isSelected);
         if (!this.state.checked && isSelectedAll) this.setState({ checked: true })
         if (this.state.checked && !isSelectedAll) this.setState({ checked: false })

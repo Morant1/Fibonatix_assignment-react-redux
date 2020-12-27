@@ -18,6 +18,13 @@ class _StudentDetails extends Component {
     }
 
     componentDidMount() {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+        // FOR MOBILE
+
         this.loadStudent();
     }
 
