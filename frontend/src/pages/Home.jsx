@@ -45,12 +45,12 @@ class _Home extends Component {
     select = async (student) => {
         const currStudent = { ...student };
         currStudent.isSelected = !currStudent.isSelected;
-        if (this.state.checked && !currStudent.isSelected) this.setState({checked:false})
-
+        // if (this.state.checked && !currStudent.isSelected) this.setState({ checked: false })
         await this.props.updateStudent(currStudent);
 
         const isSelectedAll = this.props.students.every(student => student.isSelected);
-        if (this.state.checked === false && isSelectedAll) this.setState({checked:true})
+        if (!this.state.checked && isSelectedAll) this.setState({ checked: true })
+        if (this.state.checked && !isSelectedAll) this.setState({ checked: false })
     }
 
     onRemoveBtn = async () => {
@@ -77,7 +77,6 @@ class _Home extends Component {
         const { pageIdx, pageSize } = this.state;
 
         var startIdx = pageIdx * pageSize;
-
         return students.slice(startIdx, startIdx + pageSize);
     }
 
@@ -110,8 +109,6 @@ class _Home extends Component {
                             }} />}
                             label="Select all"
                         />
-
-                        {/* <h1><i className="fas fa-user-graduate"></i>Students</h1> */}
                     </div>
                     <StudentList students={students} select={this.select} />
                     <div className="navigation">
