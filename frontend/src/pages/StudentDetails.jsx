@@ -65,12 +65,13 @@ class _StudentDetails extends Component {
 
         return (
             <div className="student-details">
+                {!isEditMode && <div className="details-container">
 
                 <div className="img-container">
                 <i onClick={() => { this.onBack() }} className="back fas fa-arrow-circle-left"></i>
                 <img alt="img_profile" src={`https://randomuser.me/api/portraits/${student.gender === 'male' ? 'men' : 'women'}/${student._id}.jpg`} />
                 </div>
-                {!isEditMode && <div className="details-container">
+                
                     <h1><i className="fas fa-user-graduate"></i> {this.capitalizeText(student.name)} <span>{student.age} years old</span></h1>
                     <ul>
                         <li><span><i className="fas fa-venus-mars"></i></span>{this.capitalizeText(student.gender)}</li>
