@@ -17,7 +17,6 @@ function App() {
           <Route component={Home} path='/' />
         </Switch>
       </Router>
-      {/* <Footer/> */}
     </div>
   )
 }

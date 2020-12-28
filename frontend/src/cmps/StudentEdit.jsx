@@ -6,7 +6,7 @@ export class StudentEdit extends Component {
     state = {
         student: {
             name: '',
-            age: '',
+            age: 0,
             gender: '',
             city: '',
             email: '',
@@ -52,7 +52,7 @@ export class StudentEdit extends Component {
                 <form onSubmit={this.onSaveStudent} className="edit-student">
                     <TextField label="Name:" type="text" autoComplete="off" name="name" onChange={this.handleInput} value={student.name} />
                     <TextField label="Age:" type="number" autoComplete="off" name="age" onChange={this.handleInput} value={student.age} />
-                    <TextField label="Age:" type="text" autoComplete="off" name="city" onChange={this.handleInput} value={student.city} />
+                    <TextField label="City:" type="text" autoComplete="off" name="city" onChange={this.handleInput} value={student.city} />
                     <TextField label="Email:" type="email" autoComplete="off" name="email" onChange={this.handleInput} value={student.email} />
                     <TextField label="University:" type="text" autoComplete="off" name="university" onChange={this.handleInput} value={student.university} />
                     <div className="select">
